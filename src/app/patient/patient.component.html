@@ -1,0 +1,30 @@
+<main class="container">
+    <h2>Liste des patients</h2>
+    <button type="button" class="btn btn-primary link_toPatient" id="AddPatientModal" data-bs-toggle="modal" data-bs-target="#addPatientForm">
+        Ajouter un patient
+    </button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col" class="col-1">#</th>
+            <th scope="col" class="col-3">Nom & prenom</th>
+            <th scope="col" class="col-3"> Email</th>
+            <th scope="col" class="col-2">Ville</th>
+            <th scope="col" class="col-3">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let patient of patients">
+                <th scope="row">{{patient.id}}</th>
+                <td>{{patient.nom}} {{patient.prenom}}</td>
+                <td>{{patient.email}}</td>
+                <td>{{patient.ville.nom}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" id="editPatientForm" data-bs-toggle="modal" data-bs-target="#editPatientForm">Update</button>
+                    <button class="btn btn-danger suppression" id="delete" >Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+

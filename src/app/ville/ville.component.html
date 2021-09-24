@@ -1,0 +1,41 @@
+<main class="container">
+    <div class="row" id="titre_listeVille">
+        <div class="col">
+          <h1>Liste des villes</h1>
+        </div>
+        <div class="col">
+          
+          <button type="button" class="btn btn-primary" id="AddVilleModal" data-bs-toggle="modal" data-bs-target="#addVilleForm">
+            Ajouter une ville
+        </button>
+        </div>
+      </div>
+    
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col" class="col-1">#</th>
+          <th scope="col" class="col-3">Code postal </th>
+          <th scope="col" class="col-4">Nom</th>
+          <th scope="col" class="col-4">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+         <tr *ngFor="let ville of villes">
+          <th scope="row">{{ville.id}}</th>
+          <td>{{ville.codePostal}}</td>
+          <td>{{ville.nom}}</td> 
+           <td>
+            <button type="button" class="btn btn-primary" id="updatePatientModal" data-bs-toggle="modal" data-bs-target="#updatePatientForm">
+                Update
+              </button>
+    
+            <button class="btn btn-danger" id="delete">
+              <a>Delete</a>
+            </button>
+          </td>
+        </tr> 
+     
+        </tbody>
+      </table>
+</main>
