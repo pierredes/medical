@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Ville } from '../classes/ville';
 import {HttpClient, HttpHeaders, HttpClientModule} from '@angular/common/http';
 
@@ -16,11 +16,11 @@ const httpOption = {
 export class VilleComponent implements OnInit {
 
   villes : Array<Ville> = [];
-  constructor( private http : HttpClient ) { }
+  constructor( private http : HttpClient, @Inject('BASE_API_URL') private baseUrl: string ) { }
 
 
   ngOnInit(): void {
-    this.http.get<Ville[]>("http://localhost:8080/ws/ville/", httpOption).subscribe(
+    this.http.get<Ville[]>( this.baseUrl + "/ws/ville/", httpOption).subscribe(
       data => {
         this.villes = data;
         console.log(data)

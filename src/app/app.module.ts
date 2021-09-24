@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { PatientComponent } from './patient/patient.component';
 import { VilleComponent } from './ville/ville.component';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: "BASE_API_URL", useValue: environment.base_url }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
