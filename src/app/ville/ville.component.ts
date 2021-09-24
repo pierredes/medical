@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Ville } from '../classes/ville';
 import {HttpClient, HttpHeaders, HttpClientModule} from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -16,17 +17,34 @@ const httpOption = {
 export class VilleComponent implements OnInit {
 
   villes : Array<Ville> = [];
-  constructor( private http : HttpClient, @Inject('BASE_API_URL') private baseUrl: string ) { }
+  // nom :  Ville = ; 
+  ville: Ville = new Ville();
+
+  constructor( private http : HttpClient ) { }
 
 
   ngOnInit(): void {
-    this.http.get<Ville[]>( this.baseUrl + "/ws/ville/", httpOption).subscribe(
+    this.updateVille();
+  }
+
+  updateVille() : void {
+    this.http.get<Ville[]>( environment.base_url + "/ws/ville/", httpOption).subscribe(
       data => {
         this.villes = data;
         console.log(data)
         
       }
     )
+  }
+
+  addVille() : void {
+    this.http.post<Ville>(environment.base_url + "/ws/ville/", this.ville, httpOption).subscribe(
+      data => {
+        console.log(data);
+        this.updateVille();
+      }
+    )
+
   }
 
 }
