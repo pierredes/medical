@@ -38,7 +38,7 @@
      
         </tbody>
       </table>
-      <button (click)="updateVille()" class="btn btn-primary">Mettre a jour</button>
+      <button (click)="getVilles()" class="btn btn-primary">Mettre a jour</button>
 
 
       <!-- Ajout -->
@@ -47,10 +47,10 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Ajouter une ville</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" #closeModal class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="" method="post" (submit)="addVille()">
+              <form action="" method="post" (submit)="addVilleOnSubmitForm()">
                 <div class="col">
                   <label for="nom_ville" class="form-label">Nom de la ville :</label>
                   <input type="text" class="form-control" name="nom" id="nom_ville" [(ngModel)]="ville.nom" placeholder="Entrez votre nom de ville" aria-label="Entrez votre nom de ville">

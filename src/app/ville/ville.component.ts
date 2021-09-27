@@ -1,13 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ville } from '../classes/ville';
-import {HttpClient, HttpHeaders, HttpClientModule} from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-
-const httpOption = {
-  headers: new HttpHeaders({
-    'Authorization' : 'Basic cGllcnJlOjEyMzQ='
-  })
-};
+import { VilleService } from '../service/ville.service';
 
 @Component({
   selector: 'app-ville',
@@ -18,26 +11,28 @@ export class VilleComponent implements OnInit {
 
   villes : Array<Ville> = [];
   ville: Ville = new Ville();
+  @ViewChild('closeModal') closeModal : any;
 
-  constructor( private http : HttpClient ) { }
+  constructor( private vs : VilleService ) { }
 
 
   ngOnInit(): void {
-    this.updateVille();
+    this.getVilles();
   }
 
-  updateVille() : void {
-    this.http.get<Ville[]>( environment.base_url + "/ws/ville/", httpOption).subscribe(
+  getVilles() : void {
+    this.vs.GetAllVille().subscribe(
       data => {
         this.villes = data;        
       }
     )
   }
 
-  addVille() : void {
-    this.http.post<Ville>(environment.base_url + "/ws/ville/", this.ville, httpOption).subscribe(
+  addVilleOnSubmitForm() : void {
+    this.vs.addVille(this.ville).subscribe(
       data => {
-        this.updateVille();
+        this.getVilles();
+        this.closeModal.nativeElement.click();
       }
     )
   }

@@ -1,8 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Patient } from '../classes/patient';
 import { Ville} from '../classes/ville';
 import {HttpClient, HttpHeaders, HttpClientModule} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { PatientService } from '../service/patient.service';
+import { VilleService } from '../service/ville.service';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -19,16 +21,17 @@ export class PatientComponent implements OnInit {
   patients: Array<Patient> = [];
   patient : Patient = new Patient();
   villes : Array<Ville> = [];
+  @ViewChild('closebuttun') closebuttun: any;
   
 
-  constructor( private http : HttpClient) { }
+  constructor( private ps : PatientService, private vs : VilleService) { }
 
   ngOnInit(): void {
     this.getPatient();
     this.updateVille();
 }
     getPatient() : void {
-      this.http.get<Patient[]>(environment.base_url+ "/ws/patient/", httpOption).subscribe(
+      this.ps.getAllPatient().subscribe(
         data => {
           this.patients = data;
         }
@@ -36,22 +39,20 @@ export class PatientComponent implements OnInit {
     }
 
     updateVille() : void {
-      this.http.get<Ville[]>( environment.base_url + "/ws/ville/", httpOption).subscribe(
+      this.vs.GetAllVille().subscribe(
         data => {
-          console.log(data)
           this.villes = data;        
         }
       )
     }
 
     addPatient() : void {console.log(this.patient);
-      this.http.post<Patient>(environment.base_url + "/ws/patient/", this.patient, httpOption).subscribe(
+      this.ps.addPatient(this.patient).subscribe(
         data => {
-          console.log(data);
+          this.closebuttun.nativeElement.click();
           this.getPatient();
         }
       )
-    } 
-  
+    }
 
 }

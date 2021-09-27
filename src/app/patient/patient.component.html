@@ -21,7 +21,7 @@
                 <td>{{patient.ville?.nom}}</td>
                 <td>
                     <button type="button" class="btn btn-primary" id="editPatientForm" data-bs-toggle="modal" data-bs-target="#editPatientForm">Update</button>
-                    <button class="btn btn-danger suppression" id="delete" >Delete</button>
+                    <button class="btn btn-danger suppression" id="delete">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -33,7 +33,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ajouter un patient</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" #closebuttun class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" (submit)="addPatient()">
