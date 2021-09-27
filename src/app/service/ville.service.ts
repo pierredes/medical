@@ -19,4 +19,8 @@ export class VilleService {
   addVille(ville : Ville) : Observable<Ville> {
     return this.http.post<Ville>(environment.base_url + "/ws/ville/", ville, httpOption)
   }
+
+  deleteVille(id : number | undefined) : Observable<Object> {
+    return this.http.delete(environment.base_url + "/ws/ville/delete/" + id, httpOption)
+  }
 }

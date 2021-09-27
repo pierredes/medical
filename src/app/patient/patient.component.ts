@@ -46,11 +46,20 @@ export class PatientComponent implements OnInit {
       )
     }
 
-    addPatient() : void {console.log(this.patient);
+    addPatient() : void {
       this.ps.addPatient(this.patient).subscribe(
         data => {
           this.closebuttun.nativeElement.click();
           this.getPatient();
+        }
+      )
+    }
+
+    deletePatientOnClick(id : number | undefined) {
+      this.ps.deletePatient(id).subscribe(
+        data => {
+          this.getPatient();
+          console.log("ok")
         }
       )
     }

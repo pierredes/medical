@@ -21,7 +21,7 @@
                 <td>{{patient.ville?.nom}}</td>
                 <td>
                     <button type="button" class="btn btn-primary" id="editPatientForm" data-bs-toggle="modal" data-bs-target="#editPatientForm">Update</button>
-                    <button class="btn btn-danger suppression" id="delete">Delete</button>
+                    <button class="btn btn-danger suppression" id="delete" (click)="deletePatientOnClick(patient.id)">Delete</button>
                 </td>
             </tr>
         </tbody>

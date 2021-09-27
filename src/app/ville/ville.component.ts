@@ -37,4 +37,12 @@ export class VilleComponent implements OnInit {
     )
   }
 
+  deleteVilleOnClick(id : number | undefined) : void {
+    this.vs.deleteVille(id).subscribe(
+      data => {
+        this.getVilles();
+      }
+    )
+  }
+
 }
