@@ -23,4 +23,12 @@ export class PatientService {
   deletePatient(id : number | undefined) : Observable<Object> {
     return this.http.delete(environment.base_url + "/ws/patient/delete/" + id, httpOption);
   }
+
+  updatePatient(patient: Patient) : Observable<Patient> {
+    return this.http.put<Patient>(environment.base_url + "/ws/patient/update/" + patient.id, patient, httpOption);
+  }
+
+  getPatientbyId(id: number | undefined) : Observable<Patient> {
+    return this.http.get<Patient>(environment.base_url + "/ws/patient/" + id, httpOption);
+  }
 }

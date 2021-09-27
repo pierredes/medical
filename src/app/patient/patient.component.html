@@ -20,7 +20,7 @@
                 <td>{{patient.email}}</td>
                 <td>{{patient.ville?.nom}}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" id="editPatientForm" data-bs-toggle="modal" data-bs-target="#editPatientForm">Update</button>
+                    <button type="button" class="btn btn-primary" (click)="editPatient(patient.id)" id="editPatientForm" data-bs-toggle="modal" data-bs-target="#addPatientForm">Update</button>
                     <button class="btn btn-danger suppression" id="delete" (click)="deletePatientOnClick(patient.id)">Delete</button>
                 </td>
             </tr>
@@ -36,7 +36,7 @@
                     <button type="button" #closebuttun class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" (submit)="addPatient()">
+                    <form action="" method="post" (submit)="addPatient()" >
                         <div class="row">
                             <div class="col">
                                 <label for="nom" class="form-label">Nom :</label>
@@ -57,9 +57,9 @@
                         </div>
                         <div class="col-12">
                             
-                            <label for="ville" class="form-label"  >Ville</label>
-                            <select name="ville" [(ngModel)]="patient.ville" id="ville" class="form-select" aria-label="ville" >
-                                <option *ngFor="let ville of villes"  [ngValue]="ville">{{ville.nom}}</option>
+                            <label for="ville" class="form-label" >Ville</label>
+                            <select name="ville" [compareWith]="compareFn" [(ngModel)]="patient.ville" id="ville" class="form-select" aria-label="ville" >
+                                <option *ngFor="let ville of villes"  [ngValue]="ville" [selected]="patient.ville?.nom" >{{ville.nom}}</option>
                                 
                             </select>
                         </div>

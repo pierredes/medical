@@ -26,7 +26,7 @@
           <td>{{ville.codePostal}}</td>
           <td>{{ville.nom}}</td> 
            <td>
-            <button type="button" class="btn btn-primary" id="updatePatientModal" data-bs-toggle="modal" data-bs-target="#updatePatientForm">
+            <button (click)="editVille(ville.id)" type="button" class="btn btn-primary" id="AddVilleModal" data-bs-toggle="modal" data-bs-target="#addVilleForm">
                 Update
               </button>
     

@@ -22,6 +22,7 @@ export class PatientComponent implements OnInit {
   patient : Patient = new Patient();
   villes : Array<Ville> = [];
   @ViewChild('closebuttun') closebuttun: any;
+  ville : Ville = new Ville();
   
 
   constructor( private ps : PatientService, private vs : VilleService) { }
@@ -47,12 +48,22 @@ export class PatientComponent implements OnInit {
     }
 
     addPatient() : void {
-      this.ps.addPatient(this.patient).subscribe(
-        data => {
-          this.closebuttun.nativeElement.click();
-          this.getPatient();
-        }
-      )
+      if(this.patient.id == undefined) {
+        this.ps.addPatient(this.patient).subscribe(
+          data => {
+            this.closebuttun.nativeElement.click();
+            this.getPatient();
+          }
+        ) 
+      } else {
+        this.ps.updatePatient(this.patient).subscribe(
+          data => {
+            this.closebuttun.nativeElement.click();
+            this.getPatient();
+          }
+        )
+      }
+      
     }
 
     deletePatientOnClick(id : number | undefined) {
@@ -63,5 +74,20 @@ export class PatientComponent implements OnInit {
         }
       )
     }
+
+    editPatient(id : number | undefined) : void {
+      this.ps.getPatientbyId(id).subscribe(
+        data => {
+          this.patient = data;
+          console.log(this.patient.ville?.nom)
+        }
+      )
+    }
+
+    compareFn(c1: Ville, c2: Ville): boolean {
+      return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  
 
 }

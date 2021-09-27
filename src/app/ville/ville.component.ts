@@ -29,20 +29,45 @@ export class VilleComponent implements OnInit {
   }
 
   addVilleOnSubmitForm() : void {
-    this.vs.addVille(this.ville).subscribe(
+    if(this.ville.id == undefined) {
+      this.vs.addVille(this.ville).subscribe(
+        data => {
+          this.getVilles();
+          this.closeModal.nativeElement.click();
+        }
+      )
+    } else {
+      this.vs.updateVille(this.ville).subscribe(
+        data => {
+          this.getVilles();
+          this.closeModal.nativeElement.click();
+        }
+      )
+    }
+    
+  }
+
+  deleteVilleOnClick(id : number | undefined) : void {
+    if(confirm("êtes vous sur de vouloir supprimer cette ville ?")) {
+      this.vs.deleteVille(id).subscribe(
+        data => {
+          this.getVilles();
+        }
+      )
+    } 
+  }
+
+
+
+  editVille(id : number | undefined) : void {
+    this.vs.getVillebyId(id).subscribe(
       data => {
-        this.getVilles();
-        this.closeModal.nativeElement.click();
+        this.ville = data;
+        console.log(data)
       }
     )
   }
 
-  deleteVilleOnClick(id : number | undefined) : void {
-    this.vs.deleteVille(id).subscribe(
-      data => {
-        this.getVilles();
-      }
-    )
-  }
+
 
 }

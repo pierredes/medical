@@ -16,6 +16,10 @@ export class VilleService {
     return this.http.get<Ville[]>(environment.base_url + "/ws/ville/", httpOption);
   }
 
+  getVillebyId(id: number | undefined) : Observable<Ville> {
+    return this.http.get<Ville>(environment.base_url + "/ws/ville/" + id, httpOption);
+  }
+
   addVille(ville : Ville) : Observable<Ville> {
     return this.http.post<Ville>(environment.base_url + "/ws/ville/", ville, httpOption)
   }
@@ -23,4 +27,10 @@ export class VilleService {
   deleteVille(id : number | undefined) : Observable<Object> {
     return this.http.delete(environment.base_url + "/ws/ville/delete/" + id, httpOption)
   }
+
+  updateVille(ville: Ville) : Observable<Ville> {
+    return this.http.put<Ville>(environment.base_url + "/ws/ville/update/" + ville.id, ville, httpOption);
+  }
+
+
 }
