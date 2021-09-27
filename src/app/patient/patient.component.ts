@@ -17,15 +17,41 @@ const httpOption = {
 })
 export class PatientComponent implements OnInit {
   patients: Array<Patient> = [];
+  patient : Patient = new Patient();
+  villes : Array<Ville> = [];
   
+
   constructor( private http : HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<Patient[]>(environment.base_url+ "/ws/patient/", httpOption).subscribe(
-      data => {
-        this.patients = data;
-      }
-    )
-  }
+    this.getPatient();
+    this.updateVille();
+}
+    getPatient() : void {
+      this.http.get<Patient[]>(environment.base_url+ "/ws/patient/", httpOption).subscribe(
+        data => {
+          this.patients = data;
+        }
+      )
+    }
+
+    updateVille() : void {
+      this.http.get<Ville[]>( environment.base_url + "/ws/ville/", httpOption).subscribe(
+        data => {
+          console.log(data)
+          this.villes = data;        
+        }
+      )
+    }
+
+    addPatient() : void {console.log(this.patient);
+      this.http.post<Patient>(environment.base_url + "/ws/patient/", this.patient, httpOption).subscribe(
+        data => {
+          console.log(data);
+          this.getPatient();
+        }
+      )
+    } 
+  
 
 }

@@ -2,19 +2,19 @@ import { Ville } from "./ville";
 
 export class Patient {
     // comme java
-    id : number; 
-    nom : string;
-    prenom:  string;
-    telephone : string;
-    email : string;
-    ville : Ville;
+    id : number | undefined; 
+    nom : string | undefined;
+    prenom:  string | undefined;
+    email : string | undefined;
+    telephone : string | undefined;
+    ville : Ville | undefined;
 
-    constructor( _id : number, _nom : string, _prenom : string, _telephone : string, _email : string, _ville : Ville) {
+    constructor( _id? : number | undefined, _nom? : string | undefined, _prenom? : string | undefined,_email? : string | undefined, _telephone? : string | undefined, _ville? : Ville | undefined) {
         this.id = _id;
         this.nom = _nom;
         this.prenom = _prenom;
-        this.telephone = _telephone;
         this.email = _email;
+        this.telephone = _telephone;
         this.ville = _ville;
     }
 

@@ -18,7 +18,7 @@
                 <th scope="row">{{patient.id}}</th>
                 <td>{{patient.nom}} {{patient.prenom}}</td>
                 <td>{{patient.email}}</td>
-                <td>{{patient.ville.nom}}</td>
+                <td>{{patient.ville?.nom}}</td>
                 <td>
                     <button type="button" class="btn btn-primary" id="editPatientForm" data-bs-toggle="modal" data-bs-target="#editPatientForm">Update</button>
                     <button class="btn btn-danger suppression" id="delete" >Delete</button>
@@ -26,5 +26,50 @@
             </tr>
         </tbody>
     </table>
+
+    <!-- Ajout patient -->
+    <div class="modal fade" id="addPatientForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un patient</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" (submit)="addPatient()">
+                        <div class="row">
+                            <div class="col">
+                                <label for="nom" class="form-label">Nom :</label>
+                                <input type="text"class="form-control" [(ngModel)]="patient.nom" name="nom" id="nom" placeholder="Entrez votre nom de famille" aria-label="Entrez votre nom de famille">
+                            </div>
+                            <div class="col">
+                                <label for="prenom" class="form-label">Prénom :</label>
+                                <input type="text"class="form-control" [(ngModel)]="patient.prenom" name="prenom" id="prenom" placeholder="Entrez votre prénom" aria-label="Entrez votre prénom">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email :</label>
+                            <input type="email"class="form-control" [(ngModel)]="patient.email" name="email" id="email" placeholder="Entrez votre email" aria-label="Entrez votre email">
+                        </div>
+                        <div class="col-12">
+                            <label for="telephone" class="form-label">Téléphone</label>
+                            <input type="text"class="form-control" [(ngModel)]="patient.telephone" name="telephone" id="telephone" placeholder="Entrez votre numéro de Téléphone" aria-label="Entrez votre numéro de Téléphone">
+                        </div>
+                        <div class="col-12">
+                            
+                            <label for="ville" class="form-label"  >Ville</label>
+                            <select name="ville" [(ngModel)]="patient.ville" id="ville" class="form-select" aria-label="ville" >
+                                <option *ngFor="let ville of villes"  [ngValue]="ville">{{ville.nom}}</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary" id="envoyer_add_edit">Envoyer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 

@@ -17,7 +17,6 @@ const httpOption = {
 export class VilleComponent implements OnInit {
 
   villes : Array<Ville> = [];
-  // nom :  Ville = ; 
   ville: Ville = new Ville();
 
   constructor( private http : HttpClient ) { }
@@ -30,9 +29,7 @@ export class VilleComponent implements OnInit {
   updateVille() : void {
     this.http.get<Ville[]>( environment.base_url + "/ws/ville/", httpOption).subscribe(
       data => {
-        this.villes = data;
-        console.log(data)
-        
+        this.villes = data;        
       }
     )
   }
@@ -40,11 +37,9 @@ export class VilleComponent implements OnInit {
   addVille() : void {
     this.http.post<Ville>(environment.base_url + "/ws/ville/", this.ville, httpOption).subscribe(
       data => {
-        console.log(data);
         this.updateVille();
       }
     )
-
   }
 
 }
