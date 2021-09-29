@@ -1,11 +1,12 @@
 <main class="container">
+  <div *ngIf="sucess == true" class="alert alert-success" role="alert"> Opération réussi !!</div>
     <div class="row" id="titre_listeVille">
         <div class="col">
           <h1>Liste des villes</h1>
         </div>
         <div class="col">
           
-          <button type="button" class="btn btn-primary" id="AddVilleModal" data-bs-toggle="modal" data-bs-target="#addVilleForm">
+          <button type="button" class="btn btn-primary" id="AddVilleModal" data-bs-toggle="modal" data-bs-target="#addVilleForm" (click)="resetForm()">
             Ajouter une ville
         </button>
         </div>
@@ -46,10 +47,12 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Ajouter une ville</h5>
+              <h5 class="modal-title" id="exampleModalLabel" *ngIf="ville.id == undefined">Ajouter un patient</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" *ngIf="ville.id != undefined">Editer un patient</h5>
               <button type="button" #closeModal class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+              <div *ngIf="error == true" class="alert alert-danger" role="alert"> Une erreur est survenue</div>
               <form action="" method="post" (submit)="addVilleOnSubmitForm()">
                 <div class="col">
                   <label for="nom_ville" class="form-label">Nom de la ville :</label>

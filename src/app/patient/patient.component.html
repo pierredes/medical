@@ -1,8 +1,10 @@
 <main class="container">
+    <div *ngIf="sucess == true" class="alert alert-success" role="alert"> Opération réussi !!</div>
     <h2>Liste des patients</h2>
-    <button type="button" class="btn btn-primary link_toPatient" id="AddPatientModal" data-bs-toggle="modal" data-bs-target="#addPatientForm">
+    <button type="button" class="btn btn-primary link_toPatient" id="AddPatientModal" data-bs-toggle="modal" data-bs-target="#addPatientForm" (click)="resetForm()">
         Ajouter un patient
     </button>
+    
     <table class="table">
         <thead>
         <tr>
@@ -32,10 +34,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un patient</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" *ngIf="patient.id == undefined">Ajouter un patient</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" *ngIf="patient.id != undefined">Editer un patient</h5>
                     <button type="button" #closebuttun class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div *ngIf="error == true" class="alert alert-danger" role="alert"> Une erreur est survenue</div>
                     <form action="" method="post" (submit)="addPatient()" >
                         <div class="row">
                             <div class="col">
@@ -59,7 +63,7 @@
                             
                             <label for="ville" class="form-label" >Ville</label>
                             <select name="ville" [compareWith]="compareFn" [(ngModel)]="patient.ville" id="ville" class="form-select" aria-label="ville" >
-                                <option *ngFor="let ville of villes"  [ngValue]="ville" [selected]="patient.ville?.nom" >{{ville.nom}}</option>
+                                <option *ngFor="let ville of villes"  [ngValue]="ville" >{{ville.nom}}</option>
                                 
                             </select>
                         </div>

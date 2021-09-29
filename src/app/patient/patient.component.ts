@@ -23,6 +23,8 @@ export class PatientComponent implements OnInit {
   villes : Array<Ville> = [];
   @ViewChild('closebuttun') closebuttun: any;
   ville : Ville = new Ville();
+  sucess : boolean = false;
+  error : boolean = false;
   
 
   constructor( private ps : PatientService, private vs : VilleService) { }
@@ -53,13 +55,24 @@ export class PatientComponent implements OnInit {
           data => {
             this.closebuttun.nativeElement.click();
             this.getPatient();
+            this.sucess = true;
+          },
+          error => {
+            console.log("erreur :" + error);
+            this.error = true;
           }
+          
         ) 
       } else {
         this.ps.updatePatient(this.patient).subscribe(
           data => {
             this.closebuttun.nativeElement.click();
             this.getPatient();
+            this.sucess = true;
+          },
+          error => {
+            console.log("erreur :" + error);
+            this.error = true;
           }
         )
       }
@@ -71,6 +84,7 @@ export class PatientComponent implements OnInit {
         data => {
           this.getPatient();
           console.log("ok")
+          this.sucess = true;
         }
       )
     }
@@ -79,13 +93,22 @@ export class PatientComponent implements OnInit {
       this.ps.getPatientbyId(id).subscribe(
         data => {
           this.patient = data;
-          console.log(this.patient.ville?.nom)
+        },
+        error => {
+          console.log("erreur :" + error);
+          this.error = true;
         }
       )
     }
 
     compareFn(c1: Ville, c2: Ville): boolean {
       return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  resetForm() {
+    this.error = false;
+    this.sucess = false;
+    this.patient = new Patient();
   }
 
   

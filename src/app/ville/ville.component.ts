@@ -12,7 +12,9 @@ export class VilleComponent implements OnInit {
   villes : Array<Ville> = [];
   ville: Ville = new Ville();
   @ViewChild('closeModal') closeModal : any;
-
+  sucess : boolean = false;
+  error : boolean = false;
+  
   constructor( private vs : VilleService ) { }
 
 
@@ -34,6 +36,11 @@ export class VilleComponent implements OnInit {
         data => {
           this.getVilles();
           this.closeModal.nativeElement.click();
+          this.sucess = true;
+        },
+        error => {
+          console.log("erreur :" + error)
+          this.error = true;
         }
       )
     } else {
@@ -41,6 +48,11 @@ export class VilleComponent implements OnInit {
         data => {
           this.getVilles();
           this.closeModal.nativeElement.click();
+          this.sucess = true;
+        },
+        error => {
+          console.log("erreur :" + error)
+          this.error = true;
         }
       )
     }
@@ -52,6 +64,11 @@ export class VilleComponent implements OnInit {
       this.vs.deleteVille(id).subscribe(
         data => {
           this.getVilles();
+          this.sucess = true;
+        },
+        error => {
+          console.log("erreur :" + error)
+          this.error = true;
         }
       )
     } 
@@ -66,6 +83,12 @@ export class VilleComponent implements OnInit {
         console.log(data)
       }
     )
+  }
+
+  resetForm() : void {
+    this.error = false;
+    this.sucess = false;
+    this.ville = new Ville;
   }
 
 
