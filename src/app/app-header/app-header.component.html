@@ -1,5 +1,5 @@
 
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light" *ngIf="isConnected()">
         <div class="container-fluid">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -25,7 +25,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileModal">Gérer mon profil</a></li>
-                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item"  (click)="logout()">Logout</a></li>
                     </ul>
                 </div>
             </div>
