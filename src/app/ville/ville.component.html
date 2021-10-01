@@ -6,12 +6,16 @@
         </div>
         <div class="col">
           
-          <button type="button" class="btn btn-primary" id="AddVilleModal" data-bs-toggle="modal" data-bs-target="#addVilleForm" (click)="resetForm()">
+          <button type="button" class="btn btn-primary" id="AddVilleModal" [routerLink]="['addedit/', undefined]">
             Ajouter une ville
         </button>
         </div>
+        
       </div>
-    
+      <form class="d-flex col-5">
+        <input type="search" class="form-control me-2" placeholder="Rechercher une ville" aria-label="Rechercher une ville">
+        <button type="submit" class="btn btn-outline-success">Rechercher</button>
+    </form>
       <table class="table">
         <thead>
         <tr>
@@ -27,7 +31,7 @@
           <td>{{ville.codePostal}}</td>
           <td>{{ville.nom}}</td> 
            <td>
-            <button (click)="editVille(ville.id)" type="button" class="btn btn-primary" id="AddVilleModal" data-bs-toggle="modal" data-bs-target="#addVilleForm">
+            <button  [routerLink]="['addedit/', ville.id]" type="button" class="btn btn-primary" >
                 Update
               </button>
     
@@ -43,7 +47,7 @@
 
 
       <!-- Ajout -->
-      <div class="modal fade" id="addVilleForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- <div class="modal fade" id="addVilleForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -69,5 +73,5 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 </main>

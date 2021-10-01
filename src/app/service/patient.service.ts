@@ -12,8 +12,13 @@ export class PatientService {
 
   constructor(private http : HttpClient) { }
 
-  getAllPatient(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(environment.base_url + "/ws/patient/", httpOption);
+  getAllPatient(search : string): Observable<Patient[]> {
+    let searchCondition = ""
+
+    if( search.length > 0 ){
+      searchCondition = "?search="+search; 
+    }
+    return this.http.get<Patient[]>(environment.base_url + "/ws/patient/" + searchCondition, httpOption);
   }
 
   addPatient(patient : Patient) : Observable<Patient> {
@@ -30,5 +35,9 @@ export class PatientService {
 
   getPatientbyId(id: number | undefined) : Observable<Patient> {
     return this.http.get<Patient>(environment.base_url + "/ws/patient/" + id, httpOption);
+  }
+
+  getPatientByName(name: String | undefined) : Observable<Patient[]> {
+    return this.http.get<Patient[]>(environment.base_url + "/ws/patient/?search=" + name, httpOption)
   }
 }

@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="ville.id == undefined">Ajouter une ville</h5>
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="ville.id != undefined">Editer une ville</h5>
+    </div>
+    <form action="" method="post" (submit)="addVilleOnSubmitForm()">
+        <div class="col">
+        <label for="nom_ville" class="form-label">Nom de la ville :</label>
+        <input type="text" class="form-control" name="nom" id="nom_ville" [(ngModel)]="ville.nom" placeholder="Entrez votre nom de ville" aria-label="Entrez votre nom de ville">
+        </div>
+        <div class="col">
+        <label for="cp" class="form-label">Code postal :</label>
+        <input type="text" class="form-control" name="cp" id="cp" [(ngModel)]="ville.codePostal" placeholder="Entrez votre code postal" aria-label="Entrez votre code postal">
+        </div>
+        <div class="col-2">
+        <button type="submit" class="btn btn-primary" id="envoyer_add_edit">Envoyer</button>
+        </div>
+  </form>
+</div>
+

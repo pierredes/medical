@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { VilledetailsComponent } from './ville/villedetails/villedetails.component';
+import { RendezvousComponent } from './rendezvous/rendezvous.component';
+import { RendezvousdetailsComponent } from './rendezvous/rendezvousdetails/rendezvousdetails.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
     PatientComponent,
     VilleComponent,
-    LoginComponent
+    LoginComponent,
+    VilledetailsComponent,
+    RendezvousComponent,
+    RendezvousdetailsComponent
   ],
   imports: [
     BrowserModule,

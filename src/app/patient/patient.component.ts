@@ -25,7 +25,7 @@ export class PatientComponent implements OnInit {
   ville : Ville = new Ville();
   sucess : boolean = false;
   error : boolean = false;
-  
+  search : string = "";  
 
   constructor( private ps : PatientService, private vs : VilleService) { }
 
@@ -34,7 +34,7 @@ export class PatientComponent implements OnInit {
     this.updateVille();
 }
     getPatient() : void {
-      this.ps.getAllPatient().subscribe(
+      this.ps.getAllPatient(this.search).subscribe(
         data => {
           this.patients = data;
         }

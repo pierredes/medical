@@ -14,7 +14,8 @@ export class VilleComponent implements OnInit {
   @ViewChild('closeModal') closeModal : any;
   sucess : boolean = false;
   error : boolean = false;
-  
+  search : string = "";
+
   constructor( private vs : VilleService ) { }
 
 
@@ -30,34 +31,34 @@ export class VilleComponent implements OnInit {
     )
   }
 
-  addVilleOnSubmitForm() : void {
-    if(this.ville.id == undefined) {
-      this.vs.addVille(this.ville).subscribe(
-        data => {
-          this.getVilles();
-          this.closeModal.nativeElement.click();
-          this.sucess = true;
-        },
-        error => {
-          console.log("erreur :" + error)
-          this.error = true;
-        }
-      )
-    } else {
-      this.vs.updateVille(this.ville).subscribe(
-        data => {
-          this.getVilles();
-          this.closeModal.nativeElement.click();
-          this.sucess = true;
-        },
-        error => {
-          console.log("erreur :" + error)
-          this.error = true;
-        }
-      )
-    }
+  // addVilleOnSubmitForm() : void {
+  //   if(this.ville.id == undefined) {
+  //     this.vs.addVille(this.ville).subscribe(
+  //       data => {
+  //         this.getVilles();
+  //         this.closeModal.nativeElement.click();
+  //         this.sucess = true;
+  //       },
+  //       error => {
+  //         console.log("erreur :" + error)
+  //         this.error = true;
+  //       }
+  //     )
+  //   } else {
+  //     this.vs.updateVille(this.ville).subscribe(
+  //       data => {
+  //         this.getVilles();
+  //         this.closeModal.nativeElement.click();
+  //         this.sucess = true;
+  //       },
+  //       error => {
+  //         console.log("erreur :" + error)
+  //         this.error = true;
+  //       }
+  //     )
+  //   }
     
-  }
+  // }
 
   deleteVilleOnClick(id : number | undefined) : void {
     if(confirm("êtes vous sur de vouloir supprimer cette ville ?")) {

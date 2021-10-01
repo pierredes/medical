@@ -1,41 +1,38 @@
 <main class="container">
-    <div *ngIf="sucess == true" class="alert alert-success" role="alert"> Opération réussi !!</div>
-    <h2>Liste des patients</h2>
-    <button type="button" class="btn btn-primary link_toPatient" id="AddPatientModal" data-bs-toggle="modal" data-bs-target="#addPatientForm" (click)="resetForm()">
-        Ajouter un patient
+    <!-- <div *ngIf="sucess == true" class="alert alert-success" role="alert"> Opération réussi !!</div> -->
+    <h2>Liste des rendez-vous</h2>
+    <button type="button" class="btn btn-primary link_toPatient" id="AddPatientModal" data-bs-toggle="modal" data-bs-target="#addPatientForm" [routerLink]="['addedit/', undefined]">
+        Ajouter un rendez-vous
     </button>
     
-    <div class="d-flex col-5">
-        <input type="search" class="form-control me-2" placeholder="Rechercher un patient" [(ngModel)]="search" aria-label="Rechercher un patient">
-        <button class="btn btn-outline-success" (click)="getPatient()">Rechercher</button>
-    </div>
+   
 
     <table class="table">
         <thead>
         <tr>
             <th scope="col" class="col-1">#</th>
             <th scope="col" class="col-3">Nom & prenom</th>
-            <th scope="col" class="col-3"> Email</th>
-            <th scope="col" class="col-2">Ville</th>
+            <th scope="col" class="col-3"> date</th>
+            <th scope="col" class="col-2">note</th>
             <th scope="col" class="col-3">Action</th>
         </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let patient of patients">
-                <th scope="row">{{patient.id}}</th>
-                <td>{{patient.nom}} {{patient.prenom}}</td>
-                <td>{{patient.email}}</td>
-                <td>{{patient.ville?.nom}}</td>
+            <tr *ngFor="let rendezvous of rendezVous">
+                <th scope="row">{{rendezvous.id}}</th>
+                <td>{{rendezvous.patient?.nom}} {{rendezvous.patient?.prenom}}</td>
+                <td>{{rendezvous.date}}</td>
+                <td>{{rendezvous.note}}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" (click)="editPatient(patient.id)" id="editPatientForm" data-bs-toggle="modal" data-bs-target="#addPatientForm">Update</button>
-                    <button class="btn btn-danger suppression" id="delete" (click)="deletePatientOnClick(patient.id)">Delete</button>
+                    <button type="button" class="btn btn-primary" [routerLink]="['addedit/', rendezvous.id]">Update</button>
+                    <button class="btn btn-danger suppression" id="delete">Delete</button>
                 </td>
             </tr>
         </tbody>
     </table>
 
     <!-- Ajout patient -->
-    <div class="modal fade" id="addPatientForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="addPatientForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -79,6 +76,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </main>
 
