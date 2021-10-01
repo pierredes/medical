@@ -34,6 +34,29 @@
         </tbody>
     </table>
 
+    <!-- Card template -->
+    
+    <ng-template #patientCardTemplate let-patient="patient">
+        <div class="card" style="width: 18rem;" >
+            <div class="card-body">
+                <h5 class="card-title">{{patient.nom}} {{patient.prenom}}
+                </h5>
+                <p class="card-text">
+                    Tel : {{patient.telephone}}
+                    <br> Email : {{patient.email}} </p>
+            </div>
+        </div>
+    </ng-template>
+
+    <div *ngFor="let patient of patients">
+        <ng-container *ngTemplateOutlet="patientCardTemplate;context:{patient : patient}" >
+
+        </ng-container>
+    </div>
+    
+        
+        
+
     <!-- Ajout patient -->
     <div class="modal fade" id="addPatientForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
