@@ -22,10 +22,14 @@ export class RendezvousService {
   }
 
   updateRendezvous(rendezvous : Rendezvous) : Observable<Rendezvous> {
-    return this.http.put<Rendezvous>(environment.base_url + "/ws/rdv/", rendezvous, httpOption);
+    return this.http.put<Rendezvous>(environment.base_url + "/ws/rdv/update/" + rendezvous.id , rendezvous, httpOption);
   }
 
   getRdvById(id: number | undefined) : Observable<Rendezvous> {
     return this.http.get<Rendezvous>(environment.base_url + "/ws/rdv/" + id, httpOption);
+  }
+
+  deleteRdv(id : number | undefined) : Observable<Object> {
+    return this.http.delete(environment.base_url + "/ws/rdv/delete/" + id, httpOption);
   }
 }

@@ -25,7 +25,7 @@
                 <td>{{rendezvous.note}}</td>
                 <td>
                     <button type="button" class="btn btn-primary" [routerLink]="['addedit/', rendezvous.id]">Update</button>
-                    <button class="btn btn-danger suppression" id="delete">Delete</button>
+                    <button class="btn btn-danger suppression" id="delete" (click)="deleterdv(rendezvous.id)">Delete</button>
                 </td>
             </tr>
         </tbody>
