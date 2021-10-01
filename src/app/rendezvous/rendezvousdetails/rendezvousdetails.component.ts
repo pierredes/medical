@@ -20,14 +20,18 @@ export class RendezvousdetailsComponent implements OnInit {
 
   ngOnInit(): void {
     let rdvid = Number(this.activatedRoute.snapshot.paramMap.get("id"));
-    this.rs.getRdvById(rdvid).subscribe(
+    if(rdvid > 0 ) {
+      this.rs.getRdvById(rdvid).subscribe(
       data => {
         this.rendezvous = data;
+        this.router.navigate(['rendezvous'])
       },
       error => {
         console.log(error)
       }
     )
+    }
+    
     this.getAllPatient()
   }
 

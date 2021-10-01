@@ -2,7 +2,7 @@
     <div *ngIf="success == true" class="alert alert-success" role="alert"> Opération réussi !!</div>
     <div *ngIf="error == true" class="alert alert-danger" role="alert"> Opération échoué !!</div>
     <h2>Liste des rendez-vous</h2>
-    <button type="button" class="btn btn-primary link_toPatient" id="AddPatientModal" data-bs-toggle="modal" data-bs-target="#addPatientForm" [routerLink]="['addedit/', undefined]">
+    <button type="button" class="btn btn-primary link_toPatient" id="AddPatientModal" data-bs-toggle="modal" data-bs-target="#addPatientForm" [routerLink]="['addedit/', 0]">
         Ajouter un rendez-vous
     </button>
     
