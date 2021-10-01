@@ -5,7 +5,14 @@
         Ajouter un rendez-vous
     </button>
     
-   
+    <div class="d-flex col-5">
+        <label for="patient" class="form-label">Patient</label>
+                    <select name="patient"  [(ngModel)]="search" id="patient" class="form-select" aria-label="patient" >
+                        <option *ngFor="let patient of patients"  [ngValue]="patient.nom" >{{patient.nom}} {{patient.prenom}}</option>
+                        
+                    </select>
+        <button class="btn btn-outline-success" (click)="getAllRdv()">Rechercher</button>
+    </div>
 
     <table class="table">
         <thead>

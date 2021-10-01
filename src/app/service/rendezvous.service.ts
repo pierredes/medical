@@ -13,8 +13,13 @@ export class RendezvousService {
 
   constructor(private router : Router, private http : HttpClient ) { }
 
-  getAllRdv() : Observable<Rendezvous[]> {
-    return this.http.get<Rendezvous[]>(environment.base_url + "/ws/rdv/", httpOption);
+  getAllRdv(search : string) : Observable<Rendezvous[]> {
+    let searchCondition = "";
+
+    if(search.length > 0) {
+      searchCondition = "?search="+search;
+    }
+    return this.http.get<Rendezvous[]>(environment.base_url + "/ws/rdv/" + searchCondition, httpOption);
   }
 
   addRendezvous(rendezvous : Rendezvous) : Observable<Rendezvous> {
