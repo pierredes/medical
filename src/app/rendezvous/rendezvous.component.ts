@@ -43,6 +43,7 @@ export class RendezvousComponent implements OnInit {
       data => {
         console.log(data)
         this.success = true;
+        this.getAllRdv()
       },
       error => {
         console.log(error)
