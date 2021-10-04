@@ -16,33 +16,48 @@
         <input type="search" class="form-control me-2" placeholder="Rechercher une ville" aria-label="Rechercher une ville">
         <button type="submit" class="btn btn-outline-success">Rechercher</button>
     </form>
-      <table class="table">
-        <thead>
-        <tr>
-          <th scope="col" class="col-1">#</th>
-          <th scope="col" class="col-3">Code postal </th>
-          <th scope="col" class="col-4">Nom</th>
-          <th scope="col" class="col-4">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-         <tr *ngFor="let ville of villes">
-          <th scope="row">{{ville.id}}</th>
-          <td>{{ville.codePostal}}</td>
-          <td>{{ville.nom}}</td> 
-           <td>
-            <button  [routerLink]="['addedit/', ville.id]" type="button" class="btn btn-primary" >
-                Update
+
+    <ng-container *ngIf="VilleState$ | async as state" [ngSwitch]="state.dataState">
+      <ng-container *ngSwitchCase="VillesStateEnum.INITIAL">
+        <div class="p-2"> Initial State</div>
+      </ng-container>
+      <ng-container *ngSwitchCase="VillesStateEnum.LOADING">
+          <div class="p-2"> Loading...</div>
+      </ng-container>
+      <ng-container *ngSwitchCase="VillesStateEnum.ERROR">
+          <div class="p-2 text-danger"> Une erreur c'est produite veuillez réessayer</div>
+      </ng-container>
+      <ng-container *ngSwitchCase="VillesStateEnum.LOADED" class="p-4">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col" class="col-1">#</th>
+            <th scope="col" class="col-3">Code postal </th>
+            <th scope="col" class="col-4">Nom</th>
+            <th scope="col" class="col-4">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+           <tr *ngFor="let ville of state.villes">
+            <th scope="row">{{ville.id}}</th>
+            <td>{{ville.codePostal}}</td>
+            <td>{{ville.nom}}</td> 
+             <td>
+              <button  [routerLink]="['addedit/', ville.id]" type="button" class="btn btn-primary" >
+                  Update
+                </button>
+      
+              <button class="btn btn-danger" (click)="deleteVilleOnClick(ville.id)" id="delete">
+                <a>Delete</a>
               </button>
-    
-            <button class="btn btn-danger" (click)="deleteVilleOnClick(ville.id)" id="delete">
-              <a>Delete</a>
-            </button>
-          </td>
-        </tr> 
-     
-        </tbody>
-      </table>
+            </td>
+          </tr> 
+       
+          </tbody>
+        </table>
+      </ng-container>
+    </ng-container>
+      
       <button (click)="getVilles()" class="btn btn-primary">Mettre a jour</button>
 
 

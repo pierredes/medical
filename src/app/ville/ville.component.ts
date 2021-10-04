@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Ville } from '../classes/ville';
+import { getAllVilleAction } from '../ngrx/villes.actions';
+import { VilleState, VilleStateEnum } from '../ngrx/villes.reducer';
 import { VilleService } from '../service/ville.service';
 
 @Component({
@@ -16,49 +21,33 @@ export class VilleComponent implements OnInit {
   error : boolean = false;
   search : string = "";
 
-  constructor( private vs : VilleService ) { }
+  VilleState$ : Observable<VilleState> | null=null;
+  readonly VillesStateEnum = VilleStateEnum;
+
+  constructor( private vs : VilleService, private store: Store<any> ) { }
 
 
-  ngOnInit(): void {
-    this.getVilles();
+  // ngOnInit(): void {
+  //   this.getVilles();
+  // }
+
+  ngOnInit() : void {
+    this.VilleState$ = this.store.pipe(
+      map((state) => state.catalogState)
+    );
+
+    this.store.dispatch(new getAllVilleAction({}))
   }
+
 
   getVilles() : void {
-    this.vs.GetAllVille().subscribe(
-      data => {
-        this.villes = data;        
-      }
-    )
+    // this.vs.GetAllVille().subscribe(
+    //   data => {
+    //     this.villes = data;        
+    //   }
+    // )
   }
 
-  // addVilleOnSubmitForm() : void {
-  //   if(this.ville.id == undefined) {
-  //     this.vs.addVille(this.ville).subscribe(
-  //       data => {
-  //         this.getVilles();
-  //         this.closeModal.nativeElement.click();
-  //         this.sucess = true;
-  //       },
-  //       error => {
-  //         console.log("erreur :" + error)
-  //         this.error = true;
-  //       }
-  //     )
-  //   } else {
-  //     this.vs.updateVille(this.ville).subscribe(
-  //       data => {
-  //         this.getVilles();
-  //         this.closeModal.nativeElement.click();
-  //         this.sucess = true;
-  //       },
-  //       error => {
-  //         console.log("erreur :" + error)
-  //         this.error = true;
-  //       }
-  //     )
-  //   }
-    
-  // }
 
   deleteVilleOnClick(id : number | undefined) : void {
     if(confirm("êtes vous sur de vouloir supprimer cette ville ?")) {
